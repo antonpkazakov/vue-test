@@ -1,0 +1,38 @@
+{
+  "name": "vue-test",
+  "version": "1.0.0",
+  "description": "A demo to-do list",
+  "main": "application.js",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit",
+    "start": "node application.js",
+    "start:docker": "docker build . -t vue-test:latest && docker run --rm -d --name vue-test -p 12345:8080 vue-test:latest",
+    "vue": "vue",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vue/cli": "^3.0.0-rc.9",
+    "express": "^4.16.3",
+    "vue": "^2.5.16",
+    "vuex": "^3.0.1",
+    "webpack": "^4.16.3"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0-rc.9",
+    "@vue/cli-plugin-eslint": "^3.0.0-rc.9",
+    "@vue/cli-plugin-unit-mocha": "^3.0.0-rc.9",
+    "@vue/cli-service": "^3.0.0-rc.9",
+    "@vue/eslint-config-airbnb": "^3.0.0-rc.9",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "chai": "^4.1.2",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "vue-template-compiler": "^2.5.16"
+  }
+}
