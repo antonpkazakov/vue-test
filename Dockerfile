@@ -1,5 +1,7 @@
 FROM node:8-slim
 
+ENV NODE_ENV=development
+
 # Create app directory
 WORKDIR /app
 
@@ -12,6 +14,8 @@ RUN npm install
 
 # Bundle app source
 COPY . .
+
+RUN npm run build
 
 EXPOSE 8080
 CMD [ "npm", "start" ]
