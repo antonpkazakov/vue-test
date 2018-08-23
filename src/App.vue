@@ -6,17 +6,20 @@
             Remove the todos by clicking the 'X' near them.<br/>
             Change the priorities by dragging the todos.
         </p>
+        <TodoInput />
         <TodoList :todos="todos"/>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import TodoInput from './components/TodoInput.vue';
 import TodoList from './components/TodoList.vue';
 
 export default {
     name: 'app',
     components: {
+        TodoInput,
         TodoList,
     },
     computed: mapState([
