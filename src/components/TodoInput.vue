@@ -1,8 +1,8 @@
 <template>
-  <div class="todoList--todoInputContainer">
-      <input class="todoList--todoInput" type="text" @keyup.enter="onInputEnterKeyPress" />
-      <button class="todoList--todoAddButton" @click="onAddButtonClick">Add</button>
-  </div>
+    <div class="todoList--todoInputContainer">
+        <input class="todoList--todoInput" type="text" @keyup.enter="onInputEnterKeyPress" />
+        <button class="todoList--todoAddButton" @click="onAddButtonClick">Add</button>
+    </div>
 </template>
 
 <script>
