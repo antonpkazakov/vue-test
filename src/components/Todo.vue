@@ -1,8 +1,8 @@
 <template>
   <li class="todoList--todo" :class="{ 'todoList--todo-done': todo.isDone }">
-      <input class="todoList--todoDoneMark" type="checkbox" v-model="isDone" />
+      <input class="todoList--todoDoneMark" type="checkbox" v-model="isDoneLocal" />
       <span class="todoList--todoText">{{ todo.text }}</span>
-      <span class="todoList--removeTodoButton" @click="remove(index)">
+      <span class="todoList--removeTodoButton" @click="remove(todo.id)">
           <octicon name="x" class="todoList--removeTodoIcon"></octicon>
       </span>
   </li>
@@ -18,28 +18,27 @@ export default {
     name: 'Todo',
     data() {
         return {
-            isDone: this.todo.isDone,
+            isDoneLocal: this.todo.isDone,
         };
     },
     props: {
         todo: Object,
-        index: Number,
     },
     components: {
         Octicon,
     },
     watch: {
-        isDone(newValue) {
-            this.toggleDone(this.index, newValue);
+        isDoneLocal(newValue) {
+            this.toggleDone(this.todo.id, newValue);
         },
     },
     methods: {
         ...mapActions({
-            toggleDone(dispatch, todoIndex, isDone) {
-                dispatch('toggleDone', { todoIndex, isDone });
+            toggleDone(dispatch, todoId, isDone) {
+                dispatch('toggleDone', { todoId, isDone });
             },
-            remove(dispatch, todoIndex) {
-                dispatch('removeTodo', { todoIndex });
+            remove(dispatch, todoId) {
+                dispatch('removeTodo', { todoId });
             },
         }),
     },

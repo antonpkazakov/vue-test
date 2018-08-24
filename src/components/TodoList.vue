@@ -1,10 +1,9 @@
 <template>
     <ul class="todoList--todos" v-if="todos.length">
         <Todo
-            v-for="(todo, index) in todos"
-            :key="index"
+            v-for="todo in todos"
+            :key="todo.id"
             :todo="todo"
-            :index="index"
         />
     </ul>
     <div class="todoList--noTodosMessage" v-else>No todos added.<br/>Feel free to add one using the input above.</div>
