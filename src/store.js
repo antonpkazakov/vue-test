@@ -38,6 +38,9 @@ const store = new Vuex.Store({
             const newTodo = { ...state.todos[todoIndex], isDone };
             state.todos.splice(todoIndex, 1, newTodo);
         },
+        updateList(state, { newTodos }) {
+            Vue.set(state, 'todos', newTodos);
+        },
     },
     actions: {
         removeTodo({ commit }, { todoId }) {
@@ -48,6 +51,9 @@ const store = new Vuex.Store({
         },
         toggleDone({ commit }, { todoId, isDone }) {
             commit('toggleDone', { todoId, isDone });
+        },
+        updateList({ commit }, { newTodos }) {
+            commit('updateList', { newTodos });
         },
     },
 });

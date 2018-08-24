@@ -1,7 +1,7 @@
 <template>
     <li class="todoList--todo" :class="{ 'todoList--todo-done': todo.isDone }">
         <input class="todoList--todoDoneMark" type="checkbox" v-model="isDoneLocal" />
-        <span class="todoList--todoText">{{ todo.text }}</span>
+        <span class="todoList--todoText todoList--dragHandle">{{ todo.text }}</span>
         <span class="todoList--removeTodoButton" @click="remove(todo.id)">
             <octicon name="x" class="todoList--removeTodoIcon"></octicon>
         </span>
