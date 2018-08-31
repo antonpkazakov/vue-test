@@ -1,71 +1,21 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import initialState from './initialState';
+import savedState from './savedState';
+import TodosFilter from './modules/TodosFilter';
+import TodosList from './modules/TodosList';
 
 Vue.use(Vuex);
 
-const LOCAL_STORAGE_FIELD = 'myTodoListState';
-
-function getTodoIndex(todos, id) {
-    let todoIndex;
-    todos.every((todo, index) => {
-        if (todo.id === id) {
-            todoIndex = index;
-            return false;
-        }
-        return true;
-    });
-    return todoIndex;
-}
-
-function uniqId() {
-    return Math.floor(Math.random() * Math.floor(100000000)).toString();
-}
-
 const store = new Vuex.Store({
-    state: JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_FIELD)) || initialState,
-    mutations: {
-        setActiveFilter(state, { filter }) {
-            state.activeFilter = filter;
-        },
-        removeTodo(state, { todoId }) {
-            const todoIndex = getTodoIndex(state.todos, todoId);
-            state.todos.splice(todoIndex, 1);
-        },
-        addTodo(state, { text }) {
-            const id = uniqId();
-            state.todos.splice(0, 0, { id, text });
-        },
-        toggleDone(state, { todoId, isDone }) {
-            const todoIndex = getTodoIndex(state.todos, todoId);
-            const newTodo = { ...state.todos[todoIndex], isDone };
-            state.todos.splice(todoIndex, 1, newTodo);
-        },
-        updateList(state, { newTodos }) {
-            Vue.set(state, 'todos', newTodos);
-        },
-    },
-    actions: {
-        setActiveFilter({ commit }, { filter }) {
-            commit('setActiveFilter', { filter });
-        },
-        removeTodo({ commit }, { todoId }) {
-            commit('removeTodo', { todoId });
-        },
-        addTodo({ commit }, { text }) {
-            commit('addTodo', { text });
-        },
-        toggleDone({ commit }, { todoId, isDone }) {
-            commit('toggleDone', { todoId, isDone });
-        },
-        updateList({ commit }, { newTodos }) {
-            commit('updateList', { newTodos });
-        },
+    modules: {
+        filterData: TodosFilter,
+        listData: TodosList,
     },
 });
 
 store.subscribe((mutation, state) => {
-    window.localStorage.setItem(LOCAL_STORAGE_FIELD, JSON.stringify(state));
+    savedState.saveState(state);
 });
 
 export default store;

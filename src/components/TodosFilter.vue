@@ -2,7 +2,7 @@
     <ul class="todosFilter--container">
         <li
             class="todosFilter--filter"
-            v-for="(filter, index) in filters"
+            v-for="(filter, index) in filterData.filters"
             :key="filter.name"
             :class="{ 'todosFilter--filter-active': isFilterActive(filter.name) }"
             @click="onFilterClick(filter.name);"
@@ -18,12 +18,11 @@ import { mapActions } from 'vuex';
 export default {
     name: 'TodosFilter',
     props: {
-        activeFilter: String,
-        filters: Array,
+        filterData: Object,
     },
     methods: {
         isFilterActive(filter) {
-            return this.activeFilter === filter;
+            return this.filterData.activeFilter === filter;
         },
         onFilterClick(filter) {
             this.setActiveFilter(filter);

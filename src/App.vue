@@ -7,8 +7,8 @@
             Change the priorities by dragging the todos.
         </p>
         <TodoInput />
-        <TodosFilter :filters="filters" :active-filter="activeFilter" />
-        <TodoList :filters="filters" :active-filter="activeFilter" :todos="todos"/>
+        <TodosFilter :filterData="filterData" />
+        <TodoList :active-filter="filterData.activeFilter" :todos="listData.todos"/>
     </div>
 </template>
 
@@ -26,9 +26,8 @@ export default {
         TodoList,
     },
     computed: mapState([
-        'activeFilter',
-        'filters',
-        'todos',
+        'filterData',
+        'listData',
     ]),
 };
 </script>

@@ -33,6 +33,7 @@ module.exports = {
     }],
     "max-len": ["error", {"code": 150}],
     "no-unused-vars": ["error", { "varsIgnorePattern": "h|render", "argsIgnorePattern": "props|state|status|xhr|err|error" }],
+    "import/no-named-as-default-member": "off",
   },
   parserOptions: {
     parser: 'babel-eslint'
