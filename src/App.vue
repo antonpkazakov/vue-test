@@ -7,22 +7,27 @@
             Change the priorities by dragging the todos.
         </p>
         <TodoInput />
-        <TodoList :todos="todos"/>
+        <TodosFilter :filters="filters" :active-filter="activeFilter" />
+        <TodoList :filters="filters" :active-filter="activeFilter" :todos="todos"/>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import TodoInput from './components/TodoInput.vue';
+import TodosFilter from './components/TodosFilter.vue';
 import TodoList from './components/TodoList.vue';
 
 export default {
     name: 'app',
     components: {
         TodoInput,
+        TodosFilter,
         TodoList,
     },
     computed: mapState([
+        'activeFilter',
+        'filters',
         'todos',
     ]),
 };

@@ -25,6 +25,9 @@ function uniqId() {
 const store = new Vuex.Store({
     state: JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_FIELD)) || initialState,
     mutations: {
+        setActiveFilter(state, { filter }) {
+            state.activeFilter = filter;
+        },
         removeTodo(state, { todoId }) {
             const todoIndex = getTodoIndex(state.todos, todoId);
             state.todos.splice(todoIndex, 1);
@@ -43,6 +46,9 @@ const store = new Vuex.Store({
         },
     },
     actions: {
+        setActiveFilter({ commit }, { filter }) {
+            commit('setActiveFilter', { filter });
+        },
         removeTodo({ commit }, { todoId }) {
             commit('removeTodo', { todoId });
         },

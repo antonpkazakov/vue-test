@@ -57,7 +57,7 @@ export default {
 .todoList--todoDoneMark {
     margin-right: 8px;
 }
-.todoList--todoText {
+.todoList--todos-draggable .todoList--todoText {
     cursor: grab;
 }
 .todoList--removeTodoIcon {

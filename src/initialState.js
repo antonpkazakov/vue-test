@@ -1,4 +1,12 @@
+import { filter } from './constants.js';
+
 export default {
+    activeFilter: filter.ALL,
+    filters: [
+        { name: filter.ALL },
+        { name: filter.TODO },
+        { name: filter.DONE },
+    ],
     todos: [
         { id: 'Uywejr3234', text: 'Learn Vue.js', isDone: false },
         { id: 'Uywe21r334', text: 'Conquer the Universe', isDone: false },

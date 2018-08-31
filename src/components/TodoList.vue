@@ -6,7 +6,7 @@
         @end="sortingInProgress = false"
         :options="sortOptions"
         class="todoList--todos"
-        :class="{ 'todoList--todos-sortingInProgress': sortingInProgress }"
+        :class="{ 'todoList--todos-sortingInProgress': sortingInProgress, 'todoList--todos-draggable': isDraggable }"
         v-if="todosLocal.length"
     >
         <Todo
@@ -23,6 +23,7 @@ import { mapActions } from 'vuex';
 
 import draggable from 'vuedraggable';
 import Todo from './Todo.vue';
+import { filter } from '../constants';
 
 export default {
     name: 'TodoList',
@@ -31,24 +32,40 @@ export default {
         Todo,
     },
     props: {
+        activeFilter: String,
         todos: Array,
     },
     data() {
         return {
-            sortOptions: {
-                handle: '.todoList--dragHandle',
-                forceFallback: true, // to make it work in FF
-            },
             sortingInProgress: false,
         };
     },
     computed: {
+        sortOptions() {
+            return {
+                handle: '.todoList--dragHandle',
+                forceFallback: true, // to make it work in FF
+                disabled: !this.isDraggable,
+            };
+        },
+        isDraggable() {
+            return this.activeFilter === filter.ALL;
+        },
         todosLocal: {
             get() {
+                if (this.activeFilter !== filter.ALL) {
+                    // eslint-disable-next-line arrow-body-style
+                    return this.todos.filter((element) => {
+                        return ((this.activeFilter === filter.TODO) && !element.isDone)
+                            || ((this.activeFilter === filter.DONE) && element.isDone);
+                    });
+                }
                 return this.todos;
             },
             set(newTodos) {
-                this.updateList(newTodos);
+                if (this.isDraggable) {
+                    this.updateList(newTodos);
+                }
             },
         },
     },
